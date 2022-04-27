@@ -1,7 +1,5 @@
 public class CircularQueue {
 
-    private static boolean LOGGING_MODE = false;
-
     private int front, rear; // Buffer front and rear markers
     private int[] nums; // buffer array
 
@@ -15,9 +13,7 @@ public class CircularQueue {
 
         synchronized (this) {
             if (isFull()) { // If buffer is full, waiting for space
-                if(LOGGING_MODE) System.out.println("Enqueue: waiting for slot.");
                 wait();
-                if(LOGGING_MODE) System.out.println("Enqueue: slot received.");
             } else if (isEmpty()) {
                 front++;
             }
@@ -26,7 +22,6 @@ public class CircularQueue {
             nums[rear % nums.length] = data;
 
             notify(); // Notifying that data has been added
-            if(LOGGING_MODE) System.out.println("Enqueued " + data);
         }
     }
 
@@ -34,9 +29,7 @@ public class CircularQueue {
 
         synchronized (this) {
             if (isEmpty()) { // If buffer is empty, witing for data
-                if(LOGGING_MODE) System.out.println("Dequeue: waiting for data.");
                 wait();
-                if(LOGGING_MODE) System.out.println("Dequeue: data received.");
             }
 
             int temp = nums[front % nums.length];
@@ -47,7 +40,6 @@ public class CircularQueue {
             }
 
             notify(); // Notifying that space has been freed
-            if(LOGGING_MODE) System.out.println("Dequeued " + temp);
 
             return temp;
         }
