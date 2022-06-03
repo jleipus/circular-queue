@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Main {
     // Program reads numbers from a file until it finds -1
     // Starts two threads, one for reading and one for writing
-    // Reading thread pushes to the queue, writing reads pulls from it
+    // Reading thread pushes to the queue, writing pulls from it
 
     public static int BUFFER_SIZE = 3; // Buffer length parameter
     public static int READER_DELAY_MS = 0; // Reading thread delay
